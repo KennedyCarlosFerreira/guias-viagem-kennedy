@@ -17,6 +17,9 @@ a{display:inline-block;padding:14px 24px;border-radius:12px;background:#f7f4ee;c
 var URL_PAINEL="https://script.google.com/macros/s/AKfycbzc5XFzikwwemTPJHRy8fPDTLyIfnGsDxXwSYk379IbVD77fnrC580lRta5-uxBrnwa/exec";
 document.getElementById("b").href=URL_PAINEL;
 if("serviceWorker" in navigator){navigator.serviceWorker.register("sw.js").catch(function(){})}
-if(navigator.onLine){setTimeout(function(){location.replace(URL_PAINEL)},600)}
-else{document.getElementById("m").textContent="Sem internet. O painel precisa de conexão para mostrar os dados."}
+var app=(window.matchMedia&&matchMedia("(display-mode: standalone)").matches)||navigator.standalone===true;
+var m=document.getElementById("m");
+if(!navigator.onLine){m.textContent="Sem internet. O painel precisa de conexão para mostrar os dados."}
+else if(app){m.textContent="Abrindo o painel…";setTimeout(function(){location.replace(URL_PAINEL)},300)}
+else{m.textContent="Para ter o ícone: menu do navegador > Instalar app (Android) ou Compartilhar > Adicionar à Tela de Início (iPhone). Depois, abra pelo ícone."}
 </script></body></html>
